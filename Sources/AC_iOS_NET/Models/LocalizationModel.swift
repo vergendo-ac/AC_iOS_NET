@@ -76,6 +76,10 @@ public enum LocalizationModel {
                 self.dop = location.horizontalAccuracy
             }
             
+            var urlPart: String {
+                "?lat=\(self.lat)&lon=\(self.lon)&alt=\(self.alt)&dop=\(self.dop)"
+            }
+            
         }
         
         public struct Response: Decodable {

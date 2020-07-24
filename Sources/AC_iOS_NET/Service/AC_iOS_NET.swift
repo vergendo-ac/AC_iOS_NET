@@ -13,11 +13,10 @@ open class NET {
         
         public typealias prepareCompletionHandler = (LocalizationModel.Prepare.Response?, URLResponse?, Error?) -> Void
         public static func prepare(for location: CLLocation, completion: @escaping prepareCompletionHandler) {
-            guard let url = REST.API.Localization.prepare.getUrl(for: Servers.addresses[2]) else { completion(nil, nil, nil); return }
-            guard let data = try? JSONEncoder().encode(LocalizationModel.Prepare.Request(location: location)) else { completion(nil, nil, nil); return }
+            guard let url = REST.API.Localization.prepare.getUrl(for: Servers.addresses[2], location: LocalizationModel.Prepare.Request(location: location)) else { completion(nil, nil, nil); return }
+            //guard let data = try? JSONEncoder().encode(LocalizationModel.Prepare.Request(location: location)) else { completion(nil, nil, nil); return }
             
             naitiveNet.dataTask(
-                for: data,
                 with: REST.API.Localization.prepare.additionalHeaders,
                 with: url,
                 restMethod: REST.Method.GET) { sData, sResponse, sError in

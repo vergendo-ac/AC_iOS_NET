@@ -17,7 +17,8 @@ enum REST {
     }
     
     enum API {
-        
+
+        //http://developer.vergendo.com:5000/api/localizer/prepare?lat=9.23123123&lon=8.123123
         enum Localization: String {
             case prepare //http://developer.vergendo.com:5000/api/localizer/prepare
             case localize //http://developer.vergendo.com:5000/api/localizer/localize
@@ -30,8 +31,10 @@ enum REST {
                 ["Accept" : "application/vnd.myplace.v2+json"]
             }
             
-            func getUrl(for serverAddress: String) -> URL? {
-                URL(string: serverAddress + "/api" + self.path)
+            func getUrl(for serverAddress: String, location: LocalizationModel.Prepare.Request) -> URL? {
+                let urlString = serverAddress + "/api" + self.path + location.urlPart
+                print(urlString)
+                return URL(string: urlString)
             }
         }
         
