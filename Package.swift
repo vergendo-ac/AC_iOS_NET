@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "AC_iOS_NET",
+    platforms: [
+        .iOS(.v10),
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
@@ -22,6 +25,7 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "AC_iOS_NETTests",
-            dependencies: ["AC_iOS_NET"]),
-    ]
+            dependencies: ["AC_iOS_NET"])
+    ],
+    swiftLanguageVersions: [.v5]
 )
