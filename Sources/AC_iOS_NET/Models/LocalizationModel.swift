@@ -14,7 +14,7 @@ public enum LocalizationModel {
     
     public struct Status: Decodable {
         let code: Int
-        let message: String
+        public let message: String
     }
     
     struct Camera: Decodable {
