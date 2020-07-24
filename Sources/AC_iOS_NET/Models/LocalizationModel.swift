@@ -12,7 +12,7 @@ public enum LocalizationModel {
     
 //-------------API-HELPER-STRUCTS------------------------
     
-    struct Status: Decodable {
+    public struct Status: Decodable {
         let code: Int
         let message: String
     }
