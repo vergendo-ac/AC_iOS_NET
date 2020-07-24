@@ -83,7 +83,7 @@ public enum LocalizationModel {
         }
         
         public struct Response: Decodable {
-            let status: Status
+            public let status: Status
         }
 
     }
