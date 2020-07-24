@@ -15,14 +15,14 @@ let package = Package(
             targets: ["AC_iOS_NET"]),
     ],
     dependencies: [
-        .package(name: "Alamofire", url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.2.0"))
+        //.package(name: "Alamofire", url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.2.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "AC_iOS_NET",
-            dependencies: ["Alamofire"]),
+            dependencies: []), //"Alamofire"
         .testTarget(
             name: "AC_iOS_NETTests",
             dependencies: ["AC_iOS_NET"])
