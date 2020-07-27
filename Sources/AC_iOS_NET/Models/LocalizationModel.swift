@@ -91,7 +91,11 @@ public enum LocalizationModel {
     public enum Localize {
         
         public struct Request: Encodable {
-            public let imageData: Data
+            let imageData: Data
+            
+            public init(imageData: Data) {
+                self.imageData = imageData
+            }
         }
         
         public struct Response: Decodable {
