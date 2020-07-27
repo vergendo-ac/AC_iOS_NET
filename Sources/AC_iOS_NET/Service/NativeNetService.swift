@@ -22,12 +22,25 @@ class NativeNetService {
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60.0)
         request.httpMethod = restMethod.rawValue
         
+        if let headers = request.allHTTPHeaderFields, let adHeaders = additionalHeaders {
+            print(headers)
+            
+            for (key, value) in adHeaders {
+                request.allHTTPHeaderFields?[key] = value
+            }
+            
+        } else {
+            request.allHTTPHeaderFields = additionalHeaders
+        }
+        
+        
         // insert data to the request
         if let data = data {
             request.httpBody = data
         }
         
         session.configuration.httpAdditionalHeaders = additionalHeaders
+        
         
         if tasks.keys.contains(request) {
             tasks[request]?.append(completion)
