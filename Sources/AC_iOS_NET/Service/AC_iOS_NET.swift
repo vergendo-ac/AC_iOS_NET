@@ -20,6 +20,7 @@ open class NET {
                 with: REST.API.Localization.prepare.additionalHeaders,
                 with: url,
                 restMethod: .GET) { sData, sResponse, sError in
+                    
                     guard sError == nil else { completion(nil, sResponse, sError); return }
                     guard let data = sData else { completion(nil, sResponse, nil); return }
                     

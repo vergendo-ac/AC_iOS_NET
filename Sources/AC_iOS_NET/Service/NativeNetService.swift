@@ -38,7 +38,24 @@ class NativeNetService {
                 DispatchQueue.main.async {
                     
                     print("Finished network task")
+                    if let d = data {
+                        print(String(data: data, encoding: .utf8)!)
+                    }
                     
+                    if let e = error {
+                        print(e)
+                        print(e.localizedDescription)
+                    }
+                    
+                    if let r = response {
+                        print(r)
+                        print(r.url)
+                        print(r.debugDescription)
+                        print(r.description)
+                        print(r.)
+                    }
+                    
+
                     guard let completionHandlers = self?.tasks[request] else { return }
                     for handler in completionHandlers {
                         
