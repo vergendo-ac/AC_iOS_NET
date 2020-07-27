@@ -31,8 +31,11 @@ enum REST {
                 ["Accept" : "application/vnd.myplace.v2+json"]
             }
             
-            func getUrl(for serverAddress: String, location: LocalizationModel.Prepare.Request) -> URL? {
-                let urlString = serverAddress + "/api" + self.path + location.urlPart
+            func getUrl(for serverAddress: String, additionalUrlPart: String = "") -> URL? {
+                var urlString: String = serverAddress + "/api" + self.path
+
+                urlString += additionalUrlPart
+
                 print(urlString)
                 return URL(string: urlString)
             }

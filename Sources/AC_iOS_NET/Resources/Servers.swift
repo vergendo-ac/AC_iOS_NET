@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Servers {
+open class Servers {
     
     public static let addresses: [String] = [
         "https://developer.augmented.city",

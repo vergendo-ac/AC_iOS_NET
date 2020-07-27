@@ -13,49 +13,49 @@ public enum LocalizationModel {
 //-------------API-HELPER-STRUCTS------------------------
     
     public struct Status: Decodable {
-        let code: Int
+        public let code: Int
         public let message: String
     }
     
-    struct Camera: Decodable {
-        let position: [Int]
-        let orientation: [Int]
+    public struct Camera: Decodable {
+        public let position: [Int]
+        public let orientation: [Int]
     }
     
-    struct Sticker: Decodable {
-        let sticker_id: String
-        let path: String
-        let sticker_text: String
-        let sticker_type: String
-        let sticker_detailed_type: String
+    public struct Sticker: Decodable {
+        public let sticker_id: String
+        public let path: String
+        public let sticker_text: String
+        public let sticker_type: String
+        public let sticker_detailed_type: String
     }
     
-    struct Placeholder: Decodable {
-        let placeholder_id: String
+    public struct Placeholder: Decodable {
+        public let placeholder_id: String
     }
     
-    struct ObjectInfo: Decodable {
-        let sticker: Sticker
-        let placeholder: Placeholder
+    public struct ObjectInfo: Decodable {
+        public let sticker: Sticker
+        public let placeholder: Placeholder
     }
     
-    struct NodeInfo: Decodable {
-        let id: String
-        let points: [[Int]]
+    public struct NodeInfo: Decodable {
+        public let id: String
+        public let points: [[Int]]
     }
     
-    struct Node: Decodable {
-        let node: NodeInfo
+    public struct Node: Decodable {
+        public let node: NodeInfo
     }
     
-    struct Pose: Decodable {
-        let position: [Int]
-        let orientation: [Int]
+    public struct Pose: Decodable {
+        public let position: [Int]
+        public let orientation: [Int]
     }
     
-    struct Surface: Decodable {
-        let frame: [[Int]]
-        let pose: Pose
+    public struct Surface: Decodable {
+        public let frame: [[Int]]
+        public let pose: Pose
     }
     
 //____________________________API-STRUCTS_______________________________
@@ -63,7 +63,7 @@ public enum LocalizationModel {
 
     public enum Prepare {
         
-        struct Request: Encodable {
+        public struct Request: Encodable {
             let lat: Double
             let lon: Double
             let alt: Double
@@ -88,19 +88,19 @@ public enum LocalizationModel {
 
     }
 
-    enum Localize {
+    public enum Localize {
         
-        struct Request: Encodable {
-            let imageData: Data
+        public struct Request: Encodable {
+            public let imageData: Data
         }
         
-        struct Response: Decodable {
-            let camera: Camera
-            let objects_info: [ObjectInfo]
-            let scene_id: String
-            let scene: [Node]
-            let surfaces: [Surface]
-            let status: Status
+        public struct Response: Decodable {
+            public let camera: Camera
+            public let objects_info: [ObjectInfo]
+            public let scene_id: String
+            public let scene: [Node]
+            public let surfaces: [Surface]
+            public let status: Status
         }
     }
     
