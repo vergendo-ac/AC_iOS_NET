@@ -99,10 +99,10 @@ public enum LocalizationModel {
         }
         
         public struct Response: Decodable {
-            public let camera: Camera
-            public let objects_info: [ObjectInfo]
-            public let scene_id: String
-            public let scene: [Node]
+            public let camera: Camera?
+            public let objects_info: [ObjectInfo]?
+            public let scene_id: String?
+            public let scene: [Node]?
             public let surfaces: [Surface]?
             public let status: Status
         }
