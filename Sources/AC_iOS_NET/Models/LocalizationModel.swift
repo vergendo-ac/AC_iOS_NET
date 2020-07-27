@@ -18,8 +18,8 @@ public enum LocalizationModel {
     }
     
     public struct Camera: Decodable {
-        public let position: [Int]
-        public let orientation: [Int]
+        public let position: [Double]
+        public let orientation: [Double]
     }
     
     public struct Sticker: Decodable {
@@ -41,7 +41,7 @@ public enum LocalizationModel {
     
     public struct NodeInfo: Decodable {
         public let id: String
-        public let points: [[Int]]
+        public let points: [[Double]]
     }
     
     public struct Node: Decodable {
@@ -49,12 +49,12 @@ public enum LocalizationModel {
     }
     
     public struct Pose: Decodable {
-        public let position: [Int]
-        public let orientation: [Int]
+        public let position: [Double]
+        public let orientation: [Double]
     }
     
     public struct Surface: Decodable {
-        public let frame: [[Int]]
+        public let frame: [[Double]]
         public let pose: Pose
     }
     
@@ -103,7 +103,7 @@ public enum LocalizationModel {
             public let objects_info: [ObjectInfo]
             public let scene_id: String
             public let scene: [Node]
-            public let surfaces: [Surface]
+            public let surfaces: [Surface]?
             public let status: Status
         }
     }
