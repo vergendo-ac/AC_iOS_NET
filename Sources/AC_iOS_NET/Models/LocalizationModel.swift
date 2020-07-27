@@ -69,7 +69,7 @@ public enum LocalizationModel {
             let alt: Double
             let dop: Double
             
-            init(location: CLLocation) {
+            public init(location: CLLocation) {
                 self.lat = location.coordinate.latitude
                 self.lon = location.coordinate.longitude
                 self.alt = location.altitude
