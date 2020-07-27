@@ -27,7 +27,7 @@ public enum LocalizationModel {
         public let path: String
         public let sticker_text: String
         public let sticker_type: String
-        public let sticker_detailed_type: String
+        public let sticker_detailed_type: String?
     }
     
     public struct Placeholder: Decodable {
