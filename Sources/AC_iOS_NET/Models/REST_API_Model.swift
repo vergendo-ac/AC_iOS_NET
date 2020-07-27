@@ -28,7 +28,14 @@ enum REST {
             }
             
             var additionalHeaders: [String:String] {
-                ["Accept" : "application/vnd.myplace.v2+json"]
+                var headers: [String:String] = ["Accept" : "application/vnd.myplace.v2+json"]
+                switch self {
+                case .prepare:
+                    headers["Content-Type"] = "application/x-www-form-urlencoded"
+                case .localize:
+                    headers["Content-Type"] = "image/jpeg"
+                }
+                return headers
             }
             
             func getUrl(for serverAddress: String, additionalUrlPart: String = "") -> URL? {
