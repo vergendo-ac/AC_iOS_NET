@@ -13,12 +13,10 @@ struct Media {
     let data: Data
     let mimeType: String
 
-    init?(withImage image: UIImage, name: String, forKey key: String) {
+    init?(with data: Data, name: String, forKey key: String) {
         self.key = key
         self.mimeType = "image/jpg"
         self.fileName = "\(name).jpeg"
-
-        guard let data = image.jpegData(compressionQuality: 0.5) else { return nil }
         self.data = data
     }
 }
