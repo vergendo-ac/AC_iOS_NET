@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-public enum LocalizationModel {
+open enum LocalizationModel {
     
 //-------------API-HELPER-STRUCTS------------------------
     
