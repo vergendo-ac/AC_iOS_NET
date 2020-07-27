@@ -22,8 +22,7 @@ class NativeNetService {
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60.0)
         request.httpMethod = restMethod.rawValue
         
-        if let headers = request.allHTTPHeaderFields, let adHeaders = additionalHeaders {
-            print(headers)
+        if let headers = request.allHTTPHeaderFields, headers.count > 0, let adHeaders = additionalHeaders {
             
             for (key, value) in adHeaders {
                 request.allHTTPHeaderFields?[key] = value
@@ -39,7 +38,7 @@ class NativeNetService {
             request.httpBody = data
         }
         
-        session.configuration.httpAdditionalHeaders = additionalHeaders
+        //session.configuration.httpAdditionalHeaders = additionalHeaders
         
         
         if tasks.keys.contains(request) {
