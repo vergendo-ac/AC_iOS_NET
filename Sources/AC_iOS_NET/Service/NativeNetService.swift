@@ -39,7 +39,7 @@ class NativeNetService {
                     
                     print("Finished network task")
                     if let d = data {
-                        print(String(data: data, encoding: .utf8)!)
+                        print(String(data: d, encoding: .utf8)!)
                     }
                     
                     if let e = error {
@@ -52,7 +52,6 @@ class NativeNetService {
                         print(r.url)
                         print(r.debugDescription)
                         print(r.description)
-                        print(r.)
                     }
                     
 
