@@ -43,7 +43,7 @@ open class NET {
             guard let url = REST.API.Localization.localize.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
             
             nativeNet.dataTask(
-                for: request.imageData,
+                for: request.imageData[0],
                 with: REST.API.Localization.localize.additionalHeaders,
                 with: url,
                 restMethod: .POST) { sData, sResponse, sError in
@@ -61,6 +61,34 @@ open class NET {
                         print(String(data: data, encoding: .utf8)!)
                         completion(nil, sResponse, error)
                     }
+            }
+            
+        }
+        
+        public typealias localizeMPDCompletionHandler = (LocalizationModel.Localize.Response?, URLResponse?, Error?) -> Void
+        public static func localizeMPD(at serverAddress: String = Servers.addresses[0], for request: LocalizationModel.Localize.Request, completion: @escaping localizeMPDCompletionHandler) {
+            guard let url = REST.API.Localization.localize.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
+            
+            nativeNet.dataTaskMultiPart(
+                for: request.getMedia(),
+                with: REST.API.Localization.localize.additionalHeaders,
+                with: url,
+                restMethod: .POST
+            ) { sData, sResponse, sError in
+                guard sError == nil else { completion(nil, sResponse, sError); return }
+                guard let data = sData else { completion(nil, sResponse, nil); return }
+                
+                do {
+                    //print(data)
+                    print(String(data: data, encoding: .utf8)!)
+                    let localizationResponse = try JSONDecoder().decode(LocalizationModel.Localize.Response.self, from: data)
+                    completion(localizationResponse, sResponse, nil)
+                } catch {
+                    print(error.localizedDescription)
+                    print(error)
+                    print(String(data: data, encoding: .utf8)!)
+                    completion(nil, sResponse, error)
+                }
             }
             
         }

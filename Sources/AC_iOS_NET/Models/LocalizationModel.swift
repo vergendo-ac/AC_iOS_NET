@@ -91,10 +91,26 @@ public enum LocalizationModel {
     public enum Localize {
         
         public struct Request: Encodable {
-            let imageData: Data
+            let imageData: [Data]
+            let jsonData: Data?
             
-            public init(imageData: Data) {
+            public init(imageData: [Data], jsonData: Data? = nil) {
                 self.imageData = imageData
+                self.jsonData = jsonData
+            }
+            
+            func getMedia() -> [Media] {
+                var localMedia: [Media] = []
+                self.imageData.enumerated().forEach { n, d in
+                    let imageMedia = Media(with: d, fileName: "iosImage\(n).jpg", forKey: "image", mimeType: .jpg)
+                    localMedia.append(imageMedia)
+                }
+                
+                if let jsnD = self.jsonData {
+                    let imageMedia = Media(with: jsnD, fileName: "sticker.json", forKey: "description", mimeType: .json)
+                    localMedia.append(imageMedia)
+                }
+                return localMedia
             }
         }
         

@@ -22,6 +22,7 @@ enum REST {
         enum Localization: String {
             case prepare //http://developer.vergendo.com:5000/api/localizer/prepare
             case localize //http://developer.vergendo.com:5000/api/localizer/localize
+            case addobject //http://developer.vergendo.com:5000/api/object
             
             var path: String {
                 "/localizer/\(self.rawValue)"
@@ -34,6 +35,9 @@ enum REST {
                     headers["Content-Type"] = "application/x-www-form-urlencoded"
                 case .localize:
                     headers["Content-Type"] = "image/jpeg"
+                case .addobject:
+                    headers["Accept"] = "application/vnd.myplace.v1+json"
+                    headers["Content-Type"] = "application/json; charset=utf-8"
                 }
                 return headers
             }

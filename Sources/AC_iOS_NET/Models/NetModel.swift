@@ -7,16 +7,21 @@
 
 import Foundation
 
-struct Media {
+public enum MimeType: String {
+    case jpg = "image/jpg"
+    case json = "application/json"
+}
+
+public struct Media {
     let key: String
     let fileName: String
     let data: Data
-    let mimeType: String
+    let mimeType: MimeType
 
-    init?(with data: Data, name: String, forKey key: String) {
+    public init(with data: Data, fileName: String, forKey key: String, mimeType: MimeType) {
         self.key = key
-        self.mimeType = "image/jpg"
-        self.fileName = "\(name).jpeg"
+        self.mimeType = mimeType
+        self.fileName = fileName
         self.data = data
     }
 }
