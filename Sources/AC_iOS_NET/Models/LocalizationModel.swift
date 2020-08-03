@@ -58,6 +58,41 @@ public enum LocalizationModel {
         public let pose: Pose
     }
     
+    public struct GPS: Codable {
+        public let latitude: Double
+        public let longitude: Double
+        public let altitude: Double
+        public let hdop: Double
+        
+        public init(from location: CLLocation) {
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+            self.altitude = location.altitude
+            self.hdop = location.horizontalAccuracy
+        }
+    }
+
+    public struct LocalizeJSONSettings: Codable {
+        public let gps: GPS
+        public let focalLength: Int
+        public let mirrored: Bool //def false
+        public let rotation: Int //CW: 0, 90, 180, 270 / def 0
+        
+        public init(location: CLLocation, focalLength: Int = 0, mirrored: Bool = false, rotation: Int = 0) {
+            self.gps = GPS(from: location)
+            self.focalLength = focalLength
+            self.mirrored = mirrored //def false
+            self.rotation = rotation //CW: 0, 90, 180, 270 / def 0
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case gps = "gps"
+            case focalLength = "focal_length_in_35mm_film"
+            case mirrored = "mirrored"
+            case rotation = "rotation"
+        }
+    }
+    
 //____________________________API-STRUCTS_______________________________
 
 
