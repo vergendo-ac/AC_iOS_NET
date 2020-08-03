@@ -136,15 +136,17 @@ public enum LocalizationModel {
             
             func getMedia() -> [Media] {
                 var localMedia: [Media] = []
+
+                if let jsnD = self.jsonData {
+                    let imageMedia = Media(with: jsnD, fileName: "description", forKey: "description", mimeType: .json)
+                    localMedia.append(imageMedia)
+                }
+
                 self.imageData.enumerated().forEach { n, d in
                     let imageMedia = Media(with: d, fileName: "iosImage\(n).jpg", forKey: "image", mimeType: .jpg)
                     localMedia.append(imageMedia)
                 }
                 
-                if let jsnD = self.jsonData {
-                    let imageMedia = Media(with: jsnD, fileName: "sticker.json", forKey: "description", mimeType: .json)
-                    localMedia.append(imageMedia)
-                }
                 return localMedia
             }
         }

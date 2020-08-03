@@ -161,7 +161,7 @@ class NativeNetService {
             body.append(self.convertFileData(media: photo, using: boundary))
         }
 
-        body.append("--\(boundary)--")
+        body.append("--\(boundary)--\(lineBreak)")
 
         return body
     }
