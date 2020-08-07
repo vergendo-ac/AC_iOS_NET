@@ -57,18 +57,30 @@ public enum CommonModel {
         public let placeholder_id: String?
     }
     
+    public enum StickerField: String {
+        case sticker_id
+        case path
+        case sticker_text
+        case sticker_type
+        case sticker_detailed_type
+        case created_by
+        case creation_date
+        case sticker_subtype
+        case description
+    }
+    
     public struct Sticker: Codable {
-        public let sticker_id: String?
-        public let path: String?
-        public let sticker_text: String?
-        public let sticker_type: String?
-        public let sticker_detailed_type: String?
-        public let created_by: String?
-        public let creation_date: String?
-        public let sticker_subtype: String?
-        public let description: String?
+        public var sticker_id: String?
+        public var path: String?
+        public var sticker_text: String?
+        public var sticker_type: String?
+        public var sticker_detailed_type: String?
+        public var created_by: String?
+        public var creation_date: String?
+        public var sticker_subtype: String?
+        public var description: String?
 
-        init(
+        public init(
             sticker_id: String? = nil,
             path: String? = nil,
             sticker_text: String? = nil,
@@ -89,6 +101,21 @@ public enum CommonModel {
             self.sticker_subtype = sticker_subtype
             self.description = description
         }
+        
+        public mutating func set(for field: StickerField, value: String) {
+            switch field {
+            case .sticker_id: self.sticker_id = value
+            case .path: self.path = value
+            case .sticker_text: self.sticker_text = value
+            case .sticker_type: self.sticker_type = value
+            case .sticker_detailed_type: self.sticker_detailed_type = value
+            case .created_by: self.created_by = value
+            case .creation_date: self.creation_date = value
+            case .sticker_subtype: self.sticker_subtype = value
+            case .description: self.description = value
+            }
+        }
+        
     }
     
 }
