@@ -99,7 +99,7 @@ open class NET {
         public typealias addObjectMPDCompletionHandler = (ObjectModel.AddObject.Response?, URLResponse?, Error?) -> Void
         public typealias addObjectModel = ObjectModel.ObjectModel
 
-        public static func addObjectMPD(at serverAddress: String = Servers.addresses[0], for request: ObjectModel.AddObject.Request, completion: @escaping addObjectMPDCompletionHandler) {
+        public static func addObjectMPD(to serverAddress: String = Servers.addresses[0], for request: ObjectModel.AddObject.Request, completion: @escaping addObjectMPDCompletionHandler) {
             guard let url = REST.API.ObjectOperations.object.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
             
             nativeNet.dataTaskMultiPart(
