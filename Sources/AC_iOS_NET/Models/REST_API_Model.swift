@@ -22,10 +22,9 @@ enum REST {
         enum Localization: String {
             case prepare //http://developer.vergendo.com:5000/api/localizer/prepare
             case localize //http://developer.vergendo.com:5000/api/localizer/localize
-            case addobject //http://developer.vergendo.com:5000/api/object
             
             var path: String {
-                "/localizer/\(self.rawValue)"
+                "/api/localizer/\(self.rawValue)"
             }
             
             var additionalHeaders: [String:String] {
@@ -35,21 +34,45 @@ enum REST {
                     headers["Content-Type"] = "application/x-www-form-urlencoded"
                 case .localize:
                     headers["Content-Type"] = "image/jpeg"
-                case .addobject:
-                    headers["Accept"] = "application/vnd.myplace.v1+json"
-                    headers["Content-Type"] = "application/json; charset=utf-8"
                 }
                 return headers
             }
             
             func getUrl(for serverAddress: String, additionalUrlPart: String = "") -> URL? {
-                var urlString: String = serverAddress + "/api" + self.path
+                var urlString: String = serverAddress + self.path
 
                 urlString += additionalUrlPart
 
                 print(urlString)
                 return URL(string: urlString)
             }
+        }
+        
+        enum ObjectOperations: String {
+            case object //http://developer.vergendo.com:5000/api/object
+            
+            var path: String {
+                "/api/\(self.rawValue)"
+            }
+
+            var additionalHeaders: [String:String] {
+                var headers: [String:String] = ["Accept" : "application/vnd.myplace.v1+json"]
+                switch self {
+                case .object:
+                    headers["Content-Type"] = "application/json; charset=utf-8"
+                }
+                return headers
+            }
+            
+            func getUrl(for serverAddress: String, additionalUrlPart: String = "") -> URL? {
+                var urlString: String = serverAddress + self.path
+
+                urlString += additionalUrlPart
+
+                print(urlString)
+                return URL(string: urlString)
+            }
+
         }
         
     }

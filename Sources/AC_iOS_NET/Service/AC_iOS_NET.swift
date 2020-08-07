@@ -95,4 +95,34 @@ open class NET {
         
     }
     
+    open class ObjectOperator {
+        public typealias addObjectMPDCompletionHandler = (ObjectModel.AddObject.Response?, URLResponse?, Error?) -> Void
+        public static func addObjectMPD(at serverAddress: String = Servers.addresses[0], for request: ObjectModel.AddObject.Request, completion: @escaping addObjectMPDCompletionHandler) {
+            guard let url = REST.API.ObjectOperations.object.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
+            
+            nativeNet.dataTaskMultiPart(
+                for: request.getMedia(),
+                with: REST.API.ObjectOperations.object.additionalHeaders,
+                with: url,
+                restMethod: .POST
+            ) { sData, sResponse, sError in
+                guard sError == nil else { completion(nil, sResponse, sError); return }
+                guard let data = sData else { completion(nil, sResponse, nil); return }
+                
+                do {
+                    //print(data)
+                    print(String(data: data, encoding: .utf8)!)
+                    let localizationResponse = try JSONDecoder().decode(ObjectModel.AddObject.Response.self, from: data)
+                    completion(localizationResponse, sResponse, nil)
+                } catch {
+                    print(error.localizedDescription)
+                    print(error)
+                    print(String(data: data, encoding: .utf8)!)
+                    completion(nil, sResponse, error)
+                }
+            }
+            
+        }
+    }
+    
 }

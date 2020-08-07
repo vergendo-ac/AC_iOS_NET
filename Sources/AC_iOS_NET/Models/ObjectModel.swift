@@ -2,40 +2,14 @@
 //  File.swift
 //  
 //
-//  Created by Mac on 27.07.2020.
+//  Created by Mac on 05.08.2020.
 //
 
 import Foundation
 import CoreGraphics
 
 public enum ObjectModel {
-
-    public struct Sticker: Codable {
-        let path: String?
-        let sticker_text: String?
-        let sticker_type: String?
-        let created_by: String?
-        let creation_date: String?
-        let sticker_subtype: String?
-        let description: String?
         
-        public init(path: String? = nil,
-                    sticker_text: String? = nil,
-                    sticker_type: String? = nil,
-                    created_by: String? = nil,
-                    creation_date: String? = nil,
-                    sticker_subtype: String? = nil,
-                    description: String? = nil) {
-            self.path = path
-            self.sticker_text = sticker_text
-            self.sticker_type = sticker_type
-            self.created_by = created_by
-            self.creation_date = creation_date
-            self.sticker_subtype = sticker_subtype
-            self.description = description
-        }
-    }
-
     public struct Projection: Codable {
         var points: [[Int]]
         var filename: String
@@ -48,26 +22,57 @@ public enum ObjectModel {
         }
 
     }
-
+    
     public struct Placeholder: Codable {
-        var projections: [Projection]
-    }
-
-    public struct StickerModel {
-        let stickerFrame: Dictionary<String, CGPoint>?
-        let stickerOffset: CGPoint?
-        let scaleCoeff: CGFloat?
-        let sticker: Sticker
+        public var projections: [Projection]
     }
 
     public struct ObjectModel: Codable {
-        let sticker: Sticker
-        var placeholder: Placeholder
+        public let sticker: CommonModel.Sticker
+        public var placeholder: Placeholder
         
         public mutating func add(filename: String, index: Int = 0) -> ObjectModel {
             self.placeholder.projections[index].filename = filename
             return self
         }
     }
+    
+    struct StickerPlaceholderResponse: Decodable {
+        let sticker: CommonModel.Sticker
+        let placeholder: CommonModel.PlaceholderResponse
+    }
+    
+    //____________________________API-STRUCTS_______________________________
 
+    public enum AddObject {
+        public struct Request: Encodable {
+            let imageData: Data
+            let jsonData: Data?
+            
+            public init(imageData: Data, jsonData: Data?) {
+                self.imageData = imageData
+                self.jsonData = jsonData
+            }
+            
+            func getMedia() -> [Media] {
+                var localMedia: [Media] = []
+
+                if let jsnD = self.jsonData {
+                    let imageMedia = Media(with: jsnD, fileName: "description", forKey: "description", mimeType: .json)
+                    localMedia.append(imageMedia)
+                }
+
+                let imageMedia = Media(with: imageData, fileName: "iosImage1.jpg", forKey: "image", mimeType: .jpg)
+                localMedia.append(imageMedia)
+                
+                return localMedia
+            }
+        }
+        
+        public struct Response: Decodable {
+            let objects_info: [StickerPlaceholderResponse]
+            let status: CommonModel.ServerStatusResponse
+        }
+    }
+    
 }

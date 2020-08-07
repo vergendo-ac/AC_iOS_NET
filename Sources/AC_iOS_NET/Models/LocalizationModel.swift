@@ -12,31 +12,14 @@ public enum LocalizationModel {
     
 //-------------API-HELPER-STRUCTS------------------------
     
-    public struct Status: Decodable {
-        public let code: Int
-        public let message: String
-    }
-    
     public struct Camera: Decodable {
         public let position: [Double]
         public let orientation: [Double]
     }
     
-    public struct Sticker: Decodable {
-        public let sticker_id: String
-        public let path: String
-        public let sticker_text: String
-        public let sticker_type: String
-        public let sticker_detailed_type: String?
-    }
-    
-    public struct Placeholder: Decodable {
-        public let placeholder_id: String
-    }
-    
     public struct ObjectInfo: Decodable {
-        public let sticker: Sticker
-        public let placeholder: Placeholder
+        public let sticker: CommonModel.Sticker
+        public let placeholder: CommonModel.PlaceholderResponse
     }
     
     public struct NodeInfo: Decodable {
@@ -95,7 +78,6 @@ public enum LocalizationModel {
     
 //____________________________API-STRUCTS_______________________________
 
-
     public enum Prepare {
         
         public struct Request: Encodable {
@@ -118,7 +100,7 @@ public enum LocalizationModel {
         }
         
         public struct Response: Decodable {
-            public let status: Status
+            public let status: CommonModel.ServerStatusResponse
         }
 
     }
@@ -157,7 +139,7 @@ public enum LocalizationModel {
             public let scene_id: String?
             public let scene: [Node]?
             public let surfaces: [Surface]?
-            public let status: Status
+            public let status: CommonModel.ServerStatusResponse
         }
     }
     
