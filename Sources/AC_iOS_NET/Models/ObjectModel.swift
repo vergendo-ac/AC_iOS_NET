@@ -25,11 +25,20 @@ public enum ObjectModel {
     
     public struct Placeholder: Codable {
         public var projections: [Projection]
+        
+        init(points: [CGPoint]) {
+            self.projections = [Projection(points: points)]
+        }
     }
 
     public struct ObjectModel: Codable {
         public let sticker: CommonModel.Sticker
         public var placeholder: Placeholder
+        
+        init(text: String, points: [CGPoint]) {
+            self.sticker = CommonModel.Sticker()
+            self.placeholder = Placeholder(points: points)
+        }
         
         public mutating func add(filename: String, index: Int = 0) -> ObjectModel {
             self.placeholder.projections[index].filename = filename

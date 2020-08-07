@@ -58,15 +58,37 @@ public enum CommonModel {
     }
     
     public struct Sticker: Codable {
-       public let sticker_id: String?
-       public let path: String?
-       public let sticker_text: String?
-       public let sticker_type: String?
-       public let sticker_detailed_type: String?
-       public let created_by: String?
-       public let creation_date: String?
-       public let sticker_subtype: String?
-       public let description: String?
-   }
+        public let sticker_id: String?
+        public let path: String?
+        public let sticker_text: String?
+        public let sticker_type: String?
+        public let sticker_detailed_type: String?
+        public let created_by: String?
+        public let creation_date: String?
+        public let sticker_subtype: String?
+        public let description: String?
+
+        init(
+            sticker_id: String? = nil,
+            path: String? = nil,
+            sticker_text: String? = nil,
+            sticker_type: String? = nil,
+            sticker_detailed_type: String? = nil,
+            created_by: String? = nil,
+            creation_date: String? = nil,
+            sticker_subtype: String? = nil,
+            description: String? = nil
+        ) {
+            self.sticker_id = sticker_id
+            self.path = path
+            self.sticker_text = sticker_text
+            self.sticker_type = sticker_type
+            self.sticker_detailed_type = sticker_detailed_type
+            self.created_by = created_by
+            self.creation_date = creation_date
+            self.sticker_subtype = sticker_subtype
+            self.description = description
+        }
+    }
     
 }

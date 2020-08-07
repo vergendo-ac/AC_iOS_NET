@@ -101,7 +101,7 @@ open class NET {
 
         public static func addObjectMPD(to serverAddress: String = Servers.addresses[0], for request: ObjectModel.AddObject.Request, completion: @escaping addObjectMPDCompletionHandler) {
             guard let url = REST.API.ObjectOperations.object.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
-            
+
             nativeNet.dataTaskMultiPart(
                 for: request.getMedia(),
                 with: REST.API.ObjectOperations.object.additionalHeaders,
