@@ -26,7 +26,7 @@ public enum ObjectModel {
     public struct Placeholder: Codable {
         public var projections: [Projection]
         
-        init(points: [CGPoint]) {
+        public init(points: [CGPoint]) {
             self.projections = [Projection(points: points)]
         }
     }
@@ -35,7 +35,7 @@ public enum ObjectModel {
         public let sticker: CommonModel.Sticker
         public var placeholder: Placeholder
         
-        init(text: String, points: [CGPoint]) {
+        public init(text: String, points: [CGPoint]) {
             self.sticker = CommonModel.Sticker()
             self.placeholder = Placeholder(points: points)
         }
@@ -46,9 +46,9 @@ public enum ObjectModel {
         }
     }
     
-    struct StickerPlaceholderResponse: Decodable {
-        let sticker: CommonModel.Sticker
-        let placeholder: CommonModel.PlaceholderResponse
+    public struct StickerPlaceholderResponse: Decodable {
+        public let sticker: CommonModel.Sticker
+        public let placeholder: CommonModel.PlaceholderResponse
     }
     
     //____________________________API-STRUCTS_______________________________
@@ -79,8 +79,8 @@ public enum ObjectModel {
         }
         
         public struct Response: Decodable {
-            let objects_info: [StickerPlaceholderResponse]
-            let status: CommonModel.ServerStatusResponse
+            public let objects_info: [StickerPlaceholderResponse]
+            public let status: CommonModel.ServerStatusResponse
         }
     }
     
