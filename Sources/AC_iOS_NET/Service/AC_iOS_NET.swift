@@ -96,9 +96,10 @@ open class NET {
     }
     
     open class ObjectOperator {
-        public typealias addObjectMPDCompletionHandler = (ObjectModel.AddObject.Response?, URLResponse?, Error?) -> Void
         public typealias addObjectModel = ObjectModel.ObjectModel
+        public typealias addObjectResponse = ObjectModel.AddObject.Response
         public typealias stickerField = CommonModel.StickerField
+        public typealias addObjectMPDCompletionHandler = (addObjectResponse?, URLResponse?, Error?) -> Void
 
         public static func addObjectMPD(to serverAddress: String = Servers.addresses[0], for request: ObjectModel.AddObject.Request, completion: @escaping addObjectMPDCompletionHandler) {
             guard let url = REST.API.ObjectOperations.object.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
