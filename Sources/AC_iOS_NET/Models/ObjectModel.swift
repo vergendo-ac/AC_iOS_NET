@@ -18,7 +18,7 @@ public enum ObjectModel {
             self.points = points.map {
                 [Int(($0.x - offset.x) / scale), Int(($0.y - offset.y) / scale)]
             }
-            self.filename = ""
+            self.filename = "iosImage1.jpg"
         }
 
     }
