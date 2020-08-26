@@ -9,7 +9,7 @@ import Foundation
 
 public enum MimeType: String {
     case jpg = "image/jpg"
-    case json = "application/json"
+    case json = "*/*"
 }
 
 public struct Media {

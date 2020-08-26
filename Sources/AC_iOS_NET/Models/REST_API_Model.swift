@@ -59,7 +59,7 @@ enum REST {
                 var headers: [String:String] = ["Accept" : "application/vnd.myplace.v1+json"]
                 switch self {
                 case .object:
-                    headers["Content-Type"] = "application/json; charset=utf-8"
+                    headers["Content-Type"] = "\(MimeType.json); charset=utf-8"
                 }
                 return headers
             }

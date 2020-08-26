@@ -65,7 +65,8 @@ open class NET {
             
         }
         
-        public typealias localizeMPDCompletionHandler = (LocalizationModel.Localize.Response?, URLResponse?, Error?) -> Void
+        public typealias localizeMPDResponse = LocalizationModel.Localize.Response
+        public typealias localizeMPDCompletionHandler = (localizeMPDResponse?, URLResponse?, Error?) -> Void
         public static func localizeMPD(at serverAddress: String = Servers.addresses[0], for request: LocalizationModel.Localize.Request, completion: @escaping localizeMPDCompletionHandler) {
             guard let url = REST.API.Localization.localize.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
             
