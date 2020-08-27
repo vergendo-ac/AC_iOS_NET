@@ -40,9 +40,8 @@ open class LocalizerAPI {
     open class func localizeWithRequestBuilder(description: ImageDescription, image: URL) -> RequestBuilder<LocalizationResult> {
         let path = "/localizer/localize"
         let URLString = OpenAPIClientAPI.basePath + path
-        let encoder = JSONEncoder()
         let formParams: [String:Any?] = [
-            "description": try? encoder.encode(description),
+            "description": description.encodeToJSON(),
             "image": image.encodeToJSON()
         ]
 

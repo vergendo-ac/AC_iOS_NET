@@ -86,6 +86,12 @@ extension UUID: JSONEncodable {
     }
 }
 
+extension ImageDescription: JSONEncodable {
+    func encodeToJSON() -> Any {
+        return try? JSONEncoder().encode(self)
+    }
+}
+
 extension String: CodingKey {
 
     public var stringValue: String {

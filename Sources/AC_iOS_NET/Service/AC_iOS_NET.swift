@@ -94,6 +94,15 @@ open class NET {
             
         }
         
+        public typealias localizationResultSwagger = LocalizationResult
+        public static func localizeSwagger(at serverAddress: String = Servers.addresses[0], for request: LocalizationModel.Localize.Request, completion: @escaping ((_ data: localizationResultSwagger?,_ error: Error?) -> Void)) {
+            guard let url = REST.API.Localization.localize.getUrl(for: serverAddress) else { completion(nil, nil); return }
+            //TODO: add our server address
+            LocalizerAPI.localize(description: ImageDescription(gps: ImageDescriptionGps(latitude: 1212312.12, longitude: 1123123.123)), image: url, apiResponseQueue: .main) { (localizeResult, error) in
+                completion(localizeResult, error)
+            }
+        }
+
     }
     
     open class ObjectOperator {
