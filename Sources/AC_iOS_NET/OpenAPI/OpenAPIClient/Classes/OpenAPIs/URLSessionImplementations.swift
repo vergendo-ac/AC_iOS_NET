@@ -474,6 +474,17 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
                         data: data
                     )
                 }
+                
+            case let data as Data?:
+                
+                if let d = value as Data? {
+                    urlRequest = configureDataUploadRequest(
+                        urlRequest: urlRequest,
+                        boundary: boundary,
+                        name: key,
+                        data: d
+                    )
+                }
 
             default:
                 fatalError("Unprocessable value \(value) with key \(key)")
