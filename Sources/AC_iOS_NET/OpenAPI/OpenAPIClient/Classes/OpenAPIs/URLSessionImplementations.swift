@@ -134,7 +134,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
             
             let dataTask = urlSession.dataTask(with: request) { [weak self] data, response, error in
                 
-                if d = data, let dataStr = String(data: d, encoding: .utf8) {
+                if let d = data, let dataStr = String(data: d, encoding: .utf8) {
                     print(dataStr)
                 }
                 
