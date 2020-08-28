@@ -11,6 +11,7 @@ open class Servers {
     
     public static let addresses: [String] = [
         "https://developer.augmented.city",
+        "https://developer.augmented.city:15000",
         "http://developer.vergendo.com",
         "http://developer.vergendo.com:5000",
         "http://developer.vergendo.com:15000",

@@ -18,8 +18,8 @@ open class LocalizerAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func localize(description: ImageDescription, image: URL, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
-        localizeWithRequestBuilder(description: description, image: image).execute(apiResponseQueue) { result -> Void in
+    open class func localize(server address: String? = nil, description: ImageDescription, image: URL, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
+        localizeWithRequestBuilder(server: address, description: description, image: image).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -37,9 +37,10 @@ open class LocalizerAPI {
      - parameter image: (form) A JPEG-encoded image 
      - returns: RequestBuilder<LocalizationResult> 
      */
-    open class func localizeWithRequestBuilder(description: ImageDescription, image: URL) -> RequestBuilder<LocalizationResult> {
+    open class func localizeWithRequestBuilder(server address: String? = nil, description: ImageDescription, image: URL) -> RequestBuilder<LocalizationResult> {
         let path = "/localizer/localize"
-        let URLString = OpenAPIClientAPI.basePath + path
+        let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
+        let URLString = addressString + path
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
             "image": image.encodeToJSON()
