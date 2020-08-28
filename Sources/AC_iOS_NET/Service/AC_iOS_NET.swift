@@ -96,7 +96,7 @@ open class NET {
         
         public typealias localizationResultSwagger = LocalizationResult
         public typealias imageDescription = ImageDescription
-        public static func localizeSwagger(at serverAddress: String = Servers.addresses[0], for image: URL, with description: imageDescription, completion: @escaping ((_ data: localizationResultSwagger?,_ error: Error?) -> Void)) {
+        public static func localizeSwagger(server address: String = Servers.addresses[0], for image: URL, with description: imageDescription, completion: @escaping ((_ data: localizationResultSwagger?,_ error: Error?) -> Void)) {
             //TODO: add our server address
             LocalizerAPI.localize(description: description, image: image, apiResponseQueue: .main) { (localizeResult, error) in
                 completion(localizeResult, error)
