@@ -534,6 +534,8 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
     }
     
     private func configureDataUploadRequest(urlRequest: URLRequest, boundary: String, name: String, data: Data) -> URLRequest {
+        
+        print(String(data: data, encoding: .utf8)!)
 
         var urlRequest = urlRequest
         
