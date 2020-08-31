@@ -13,8 +13,10 @@ public enum ObjectModel {
     public struct Projection: Codable {
         var points: [[Int]]
         var filename: String
+        var nativePoints: [CGPoint]
         
         public init(points: [CGPoint], offset: CGPoint = .zero, scale: CGFloat = 1.0) {
+            self.nativePoints = points
             self.points = points.map {
                 [Int(($0.x - offset.x) / scale), Int(($0.y - offset.y) / scale)]
             }
