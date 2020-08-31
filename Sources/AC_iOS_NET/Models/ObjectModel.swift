@@ -70,7 +70,7 @@ public enum ObjectModel {
                 var localMedia: [Media] = []
 
                 if let jsnD = self.jsonData {
-                    let imageMedia = Media(with: jsnD, fileName: "description", forKey: "description", mimeType: .json)
+                    let imageMedia = Media(with: jsnD, fileName: "description.json", forKey: "description", mimeType: .json)
                     localMedia.append(imageMedia)
                 }
 
