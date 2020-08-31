@@ -14,8 +14,12 @@ public enum ObjectModel {
         var points: [[Int]]
         var filename: String
         var nativePoints: [CGPoint]
+        var offset: CGPoint
+        var scale: CGFloat
         
         public init(points: [CGPoint], offset: CGPoint = .zero, scale: CGFloat = 1.0) {
+            self.offset = offset
+            self.scale = scale
             self.nativePoints = points
             self.points = points.map {
                 [Int(($0.x - offset.x) / scale), Int(($0.y - offset.y) / scale)]
