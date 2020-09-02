@@ -41,6 +41,7 @@ open class LocalizerAPI {
         let path = "/localizer/localize"
         let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
         let URLString = addressString + path
+
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
             "image": image.encodeToJSON()

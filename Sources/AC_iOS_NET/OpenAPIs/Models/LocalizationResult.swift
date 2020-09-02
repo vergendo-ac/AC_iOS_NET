@@ -12,13 +12,14 @@ public struct LocalizationResult: Codable {
 
 
     public var camera: Camera?
-    public var reconstructionId: String?
+    public var reconstructionId: Int?
+    /** Pose describes position and orientation in reconstruction coordinate system. Frame describes 4 points in placeholder coordinate system. */
     public var placeholders: [PlaceholderNode3d]?
     public var surfaces: [Surface]?
     public var objects: [ARObject]?
     public var status: LocalizationStatus
 
-    public init(camera: Camera? = nil, reconstructionId: String? = nil, placeholders: [PlaceholderNode3d]? = nil, surfaces: [Surface]? = nil, objects: [ARObject]? = nil, status: LocalizationStatus) {
+    public init(camera: Camera? = nil, reconstructionId: Int? = nil, placeholders: [PlaceholderNode3d]? = nil, surfaces: [Surface]? = nil, objects: [ARObject]? = nil, status: LocalizationStatus) {
         self.camera = camera
         self.reconstructionId = reconstructionId
         self.placeholders = placeholders

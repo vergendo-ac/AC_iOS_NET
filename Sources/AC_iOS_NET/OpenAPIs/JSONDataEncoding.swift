@@ -32,7 +32,7 @@ public struct JSONDataEncoding {
         }
 
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            urlRequest.setValue("\(MimeType.json)", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
         urlRequest.httpBody = jsonData

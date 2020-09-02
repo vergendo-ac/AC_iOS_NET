@@ -38,6 +38,12 @@ extension RawRepresentable where RawValue: JSONEncodable {
     func encodeToJSON() -> Any { return self.rawValue as Any }
 }
 
+extension ImageDescription: JSONEncodable {
+    func encodeToJSON() -> Any {
+        return try? JSONEncoder().encode(self)
+    }
+}
+
 private func encodeIfPossible<T>(_ object: T) -> Any {
     if let encodableObject = object as? JSONEncodable {
         return encodableObject.encodeToJSON()
@@ -83,12 +89,6 @@ extension URL: JSONEncodable {
 extension UUID: JSONEncodable {
     func encodeToJSON() -> Any {
         return self.uuidString
-    }
-}
-
-extension ImageDescription: JSONEncodable {
-    func encodeToJSON() -> Any {
-        return try? JSONEncoder().encode(self)
     }
 }
 
