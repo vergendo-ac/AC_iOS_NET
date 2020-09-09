@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct ARObject: Codable { 
-
+public struct ARObject: Codable {
 
     public var placeholder: Placeholder
     public var sticker: [String:String]
@@ -20,3 +19,4 @@ public struct ARObject: Codable {
     }
 
 }
+

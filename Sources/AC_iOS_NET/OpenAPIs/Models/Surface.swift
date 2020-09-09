@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Surface: Codable { 
-
+public struct Surface: Codable {
 
     public var pose: Pose
     public var frame: [Vector2d]
@@ -20,3 +19,4 @@ public struct Surface: Codable {
     }
 
 }
+

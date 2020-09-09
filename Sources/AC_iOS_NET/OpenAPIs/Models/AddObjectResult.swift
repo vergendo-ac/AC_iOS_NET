@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct AddObjectResult: Codable { 
-
+public struct AddObjectResult: Codable {
 
     public var objectsInfo: [ARObject]?
     public var status: AddObjectStatus
@@ -25,3 +24,4 @@ public struct AddObjectResult: Codable {
     }
 
 }
+

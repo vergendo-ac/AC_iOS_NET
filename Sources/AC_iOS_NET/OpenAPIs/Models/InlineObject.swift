@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct InlineObject: Codable { 
-
+public struct InlineObject: Codable {
 
     public var description: ImageDescription
     /** A JPEG-encoded image */
@@ -21,3 +20,4 @@ public struct InlineObject: Codable {
     }
 
 }
+

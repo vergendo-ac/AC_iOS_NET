@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Vector2d: Codable { 
-
+public struct Vector2d: Codable {
 
     public var x: Float
     public var y: Float
@@ -20,3 +19,4 @@ public struct Vector2d: Codable {
     }
 
 }
+

@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct PrepareResult: Codable { 
-
+public struct PrepareResult: Codable {
 
     public var status: PrepareStatus
 
@@ -18,3 +17,4 @@ public struct PrepareResult: Codable {
     }
 
 }
+

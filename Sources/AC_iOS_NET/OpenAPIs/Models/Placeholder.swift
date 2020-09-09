@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Placeholder: Codable { 
-
+public struct Placeholder: Codable {
 
     public var placeholderId: String
 
@@ -22,3 +21,4 @@ public struct Placeholder: Codable {
     }
 
 }
+

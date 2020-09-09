@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct PlaceholderNode3d: Codable { 
-
+public struct PlaceholderNode3d: Codable {
 
     public var placeholderId: String
     public var pose: Pose
@@ -28,3 +27,4 @@ public struct PlaceholderNode3d: Codable {
     }
 
 }
+

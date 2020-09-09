@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Pose: Codable { 
-
+public struct Pose: Codable {
 
     public var position: Vector3d
     public var orientation: Quaternion
@@ -20,3 +19,4 @@ public struct Pose: Codable {
     }
 
 }
+

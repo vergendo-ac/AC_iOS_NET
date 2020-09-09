@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct ImageDescriptionGps: Codable { 
-
+public struct ImageDescriptionGps: Codable {
 
     public var latitude: Float
     public var longitude: Float
@@ -24,3 +23,4 @@ public struct ImageDescriptionGps: Codable {
     }
 
 }
+

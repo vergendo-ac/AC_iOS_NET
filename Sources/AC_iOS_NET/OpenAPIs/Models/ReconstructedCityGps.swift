@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct ReconstructedCityGps: Codable { 
-
+public struct ReconstructedCityGps: Codable {
 
     public var latitude: Float
     public var longitude: Float
@@ -22,3 +21,4 @@ public struct ReconstructedCityGps: Codable {
     }
 
 }
+

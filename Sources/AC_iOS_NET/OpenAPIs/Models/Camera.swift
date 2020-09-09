@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Camera: Codable { 
-
+public struct Camera: Codable {
 
     public var pose: Pose
 
@@ -18,3 +17,4 @@ public struct Camera: Codable {
     }
 
 }
+

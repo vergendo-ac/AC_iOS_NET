@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct Quaternion: Codable { 
-
+public struct Quaternion: Codable {
 
     public var w: Float
     public var x: Float
@@ -24,3 +23,4 @@ public struct Quaternion: Codable {
     }
 
 }
+

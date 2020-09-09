@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct LocalizationResult: Codable { 
-
+public struct LocalizationResult: Codable {
 
     public var camera: Camera?
     public var reconstructionId: Int?
@@ -38,3 +37,4 @@ public struct LocalizationResult: Codable {
     }
 
 }
+

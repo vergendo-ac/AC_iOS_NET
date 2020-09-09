@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct LocalizationStatus: Codable { 
-
+public struct LocalizationStatus: Codable {
 
     public enum Code: Int, Codable, CaseIterable {
         case _0 = 0
@@ -25,3 +24,4 @@ public struct LocalizationStatus: Codable {
     }
 
 }
+

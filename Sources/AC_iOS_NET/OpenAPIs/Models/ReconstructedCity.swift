@@ -8,8 +8,7 @@
 import Foundation
 
 
-public struct ReconstructedCity: Codable { 
-
+public struct ReconstructedCity: Codable {
 
     public var id: Int
     public var name: String
@@ -24,3 +23,4 @@ public struct ReconstructedCity: Codable {
     }
 
 }
+

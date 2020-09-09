@@ -499,6 +499,7 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
                     data: data
                 )
 
+
             default:
                 fatalError("Unprocessable value \(value) with key \(key)")
             }
@@ -549,9 +550,9 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
     }
     
     private func configureDataUploadRequest(urlRequest: URLRequest, boundary: String, name: String, data: Data) -> URLRequest {
-
-        print(String(data: data, encoding: .utf8)!)
         
+        print(String(data: data, encoding: .utf8)!)
+
         var urlRequest = urlRequest
         
         var body = urlRequest.httpBody.orEmpty
@@ -592,8 +593,7 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
 
 }
 
-/*
-fileprivate extension Data {
+/*fileprivate extension Data {
     /// Append string to Data
     ///
     /// Rather than littering my code with calls to `dataUsingEncoding` to convert strings to Data, and then add that data to the Data, this wraps it in a nice convenient little extension to Data. This converts using UTF-8.
