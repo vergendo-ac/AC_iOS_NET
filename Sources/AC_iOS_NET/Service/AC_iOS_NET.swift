@@ -52,6 +52,7 @@ open class NET {
                     
                     do {
                         //print(data)
+                        
                         print(String(data: data, encoding: .utf8)!)
                         let localizationResponse = try JSONDecoder().decode(LocalizationModel.Localize.Response.self, from: data)
                         completion(localizationResponse, sResponse, nil)
