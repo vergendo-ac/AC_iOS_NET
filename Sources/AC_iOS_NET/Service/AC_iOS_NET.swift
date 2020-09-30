@@ -138,9 +138,9 @@ open class NET {
             
         }
         
-        public typealias addObjectByPoseCompletionHandler = (AddObjectResult?, Error?) -> Void
-        public static func addObjectByPose(objectWithPose: ObjectWithPose, apiResponseQueue: DispatchQueue, completion: @escaping addObjectByPoseCompletionHandler) {
-            ObjectsAPI.addObjectByPose(objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
+        public typealias addObjectWithPoseCompletionHandler = (AddObjectResult?, Error?) -> Void
+        public static func addObjectWithPose(server address: String? = nil, objectWithPose: ObjectWithPose, apiResponseQueue: DispatchQueue, completion: @escaping addObjectWithPoseCompletionHandler) {
+            ObjectsAPI.addObjectByPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
     }

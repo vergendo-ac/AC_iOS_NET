@@ -19,7 +19,7 @@ open class LocalizerAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func localize(server address: String? = nil,description: ImageDescription, image: URL, hint: LocalizationHint? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
+    open class func localize(server address: String? = nil, description: ImageDescription, image: URL, hint: LocalizationHint? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
         localizeWithRequestBuilder(server: address, description: description, image: image, hint: hint).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):

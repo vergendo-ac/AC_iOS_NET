@@ -62,8 +62,8 @@ open class ObjectsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func addObjectByPose(objectWithPose: ObjectWithPose? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AddObjectResult?,_ error: Error?) -> Void)) {
-        addObjectByPoseWithRequestBuilder(objectWithPose: objectWithPose).execute(apiResponseQueue) { result -> Void in
+    open class func addObjectByPose(server address: String? = nil, objectWithPose: ObjectWithPose? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AddObjectResult?,_ error: Error?) -> Void)) {
+        addObjectByPoseWithRequestBuilder(server: address, objectWithPose: objectWithPose).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -80,9 +80,11 @@ open class ObjectsAPI {
      - parameter objectWithPose: (body)  (optional)
      - returns: RequestBuilder<AddObjectResult> 
      */
-    open class func addObjectByPoseWithRequestBuilder(objectWithPose: ObjectWithPose? = nil) -> RequestBuilder<AddObjectResult> {
+    open class func addObjectByPoseWithRequestBuilder(server address: String? = nil, objectWithPose: ObjectWithPose? = nil) -> RequestBuilder<AddObjectResult> {
         let path = "/object/pose"
-        let URLString = OpenAPIClientAPI.basePath + path
+        let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
+        let URLString = addressString + path
+
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: objectWithPose)
 
         let url = URLComponents(string: URLString)
