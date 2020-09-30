@@ -15,11 +15,12 @@ open class LocalizerAPI {
      
      - parameter description: (form)  
      - parameter image: (form) A JPEG-encoded image 
+     - parameter hint: (form)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func localize(server address: String? = nil, description: ImageDescription, image: URL, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
-        localizeWithRequestBuilder(server: address, description: description, image: image).execute(apiResponseQueue) { result -> Void in
+    open class func localize(server address: String? = nil,description: ImageDescription, image: URL, hint: LocalizationHint? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: LocalizationResult?,_ error: Error?) -> Void)) {
+        localizeWithRequestBuilder(server: address, description: description, image: image, hint: hint).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -35,16 +36,19 @@ open class LocalizerAPI {
      - Localize uploaded image. Return camera pose and optional placeholders scene, surfaces scene and objects content. Camera, placeholders and surfaces coordinates are local coordinates in reconstruction coordinate system identified by reconstruction id.
      - parameter description: (form)  
      - parameter image: (form) A JPEG-encoded image 
+     - parameter hint: (form)  (optional)
      - returns: RequestBuilder<LocalizationResult> 
      */
-    open class func localizeWithRequestBuilder(server address: String? = nil, description: ImageDescription, image: URL) -> RequestBuilder<LocalizationResult> {
+    open class func localizeWithRequestBuilder(server address: String? = nil,description: ImageDescription, image: URL, hint: LocalizationHint? = nil) -> RequestBuilder<LocalizationResult> {
         let path = "/localizer/localize"
         let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
         let URLString = addressString + path
 
+        
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
-            "image": image.encodeToJSON()
+            "image": image.encodeToJSON(),
+            "hint": hint?.encodeToJSON()
         ]
 
         let nonNullParameters = APIHelper.rejectNil(formParams)

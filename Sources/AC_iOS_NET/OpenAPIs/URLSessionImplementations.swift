@@ -148,6 +148,7 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
                     print(e)
                     print(e.localizedDescription)
                 }
+
                 
                 guard let self = self else { return }
                 
@@ -489,9 +490,8 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
                         data: data
                     )
                 }
-                
             case let data as Data:
-                
+                    
                 urlRequest = configureDataUploadRequest(
                     urlRequest: urlRequest,
                     boundary: boundary,

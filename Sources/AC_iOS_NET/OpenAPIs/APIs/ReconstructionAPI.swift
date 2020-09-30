@@ -11,14 +11,14 @@ import Foundation
 
 open class ReconstructionAPI {
     /**
-     Get reconstructed cities list
+     Create reconstruction task
      
+     - parameter scanSeriesDescription: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    @available(*, deprecated, message: "This operation is deprecated.")
-    open class func getCities(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ReconstructedCity]?,_ error: Error?) -> Void)) {
-        getCitiesWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func createReconstructionTask(scanSeriesDescription: ScanSeriesDescription? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReconstructionTaskStatus?,_ error: Error?) -> Void)) {
+        createReconstructionTaskWithRequestBuilder(scanSeriesDescription: scanSeriesDescription).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -29,22 +29,187 @@ open class ReconstructionAPI {
     }
 
     /**
-     Get reconstructed cities list
-     - GET /supported_cities
-     - List of scanned and reconstructed cities. Localization is possible only inside this zones.
-     - returns: RequestBuilder<[ReconstructedCity]> 
+     Create reconstruction task
+     - POST /series
+     - Create a new task to reconstruct a series of images. The task passes to the status of waiting for image upload after creation. After receiving a signal that the images have been uploaded, the task is added to the queue for processing.
+     - parameter scanSeriesDescription: (body)  (optional)
+     - returns: RequestBuilder<ReconstructionTaskStatus> 
      */
-    @available(*, deprecated, message: "This operation is deprecated.")
-    open class func getCitiesWithRequestBuilder() -> RequestBuilder<[ReconstructedCity]> {
-        let path = "/supported_cities"
+    open class func createReconstructionTaskWithRequestBuilder(scanSeriesDescription: ScanSeriesDescription? = nil) -> RequestBuilder<ReconstructionTaskStatus> {
+        let path = "/series"
+        let URLString = OpenAPIClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: scanSeriesDescription)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ReconstructionTaskStatus>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Get augmented cities list
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getAllCities(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [AugmentedCity]?,_ error: Error?) -> Void)) {
+        getAllCitiesWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get augmented cities list
+     - GET /get_cities_all
+     - Get the list of augmented cities. Localization is possible only inside scanned and reconstructed areas. Information about reconstructed areas will be provided in the future.
+     - returns: RequestBuilder<[AugmentedCity]> 
+     */
+    open class func getAllCitiesWithRequestBuilder() -> RequestBuilder<[AugmentedCity]> {
+        let path = "/get_cities_all"
         let URLString = OpenAPIClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<[ReconstructedCity]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<[AugmentedCity]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get augmented city by gps
+     
+     - parameter pLatitude: (query) GPS latitude 
+     - parameter pLongitude: (query) GPS longitude 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getCityByGps(pLatitude: Double, pLongitude: Double, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AugmentedCity?,_ error: Error?) -> Void)) {
+        getCityByGpsWithRequestBuilder(pLatitude: pLatitude, pLongitude: pLongitude).execute(apiResponseQueue) { result -> Void in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get augmented city by gps
+     - GET /get_city
+     - Get augmented city by gps point
+     - parameter pLatitude: (query) GPS latitude 
+     - parameter pLongitude: (query) GPS longitude 
+     - returns: RequestBuilder<AugmentedCity> 
+     */
+    open class func getCityByGpsWithRequestBuilder(pLatitude: Double, pLongitude: Double) -> RequestBuilder<AugmentedCity> {
+        let path = "/get_city"
+        let URLString = OpenAPIClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "p_latitude": pLatitude.encodeToJSON(), 
+            "p_longitude": pLongitude.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<AugmentedCity>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get reconstruction task status
+     
+     - parameter taskId: (query) Task id 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func getReconstructionStatus(taskId: [UUID], apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: [ReconstructionTaskStatus]?,_ error: Error?) -> Void)) {
+        getReconstructionStatusWithRequestBuilder(taskId: taskId).execute(apiResponseQueue) { result -> Void in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get reconstruction task status
+     - GET /series
+     - Get series reconstruction task status by task id. Several task ids could be specified. Return status for known task ids. Return nothing for unknown task ids.
+     - parameter taskId: (query) Task id 
+     - returns: RequestBuilder<[ReconstructionTaskStatus]> 
+     */
+    open class func getReconstructionStatusWithRequestBuilder(taskId: [UUID]) -> RequestBuilder<[ReconstructionTaskStatus]> {
+        let path = "/series"
+        let URLString = OpenAPIClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "task_id": taskId.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<[ReconstructionTaskStatus]>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Upload images for reconstruction
+     
+     - parameter taskId: (query) Reconstruction task id. Only one task_id could be specified 
+     - parameter image: (form) A JPEG-encoded image, must include GPS data in EXIF tags (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    open class func updateReconstructionTask(taskId: UUID, image: URL? = nil, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: ReconstructionTaskStatus?,_ error: Error?) -> Void)) {
+        updateReconstructionTaskWithRequestBuilder(taskId: taskId, image: image).execute(apiResponseQueue) { result -> Void in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Upload images for reconstruction
+     - PUT /series
+     - Upload images for reconstruction. You can upload one image or a group of images at a time. To send a signal that the upload is complete, call the method without image data. After receiving such a signal that images are being uploaded, the service adds the task to the queue and changes its status to IN_QUEUE. When the status is changed, new images cannot be uploaded.
+     - parameter taskId: (query) Reconstruction task id. Only one task_id could be specified 
+     - parameter image: (form) A JPEG-encoded image, must include GPS data in EXIF tags (optional)
+     - returns: RequestBuilder<ReconstructionTaskStatus> 
+     */
+    open class func updateReconstructionTaskWithRequestBuilder(taskId: UUID, image: URL? = nil) -> RequestBuilder<ReconstructionTaskStatus> {
+        let path = "/series"
+        let URLString = OpenAPIClientAPI.basePath + path
+        let formParams: [String:Any?] = [
+            "image": image?.encodeToJSON()
+        ]
+
+        let nonNullParameters = APIHelper.rejectNil(formParams)
+        let parameters = APIHelper.convertBoolToString(nonNullParameters)
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "task_id": taskId.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<ReconstructionTaskStatus>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

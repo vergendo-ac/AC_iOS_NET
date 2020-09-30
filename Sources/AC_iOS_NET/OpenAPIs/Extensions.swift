@@ -86,11 +86,24 @@ extension UUID: JSONEncodable {
     }
 }
 
+extension ObjectWithMarkedImage: JSONEncodable {
+    func encodeToJSON() -> Any {
+        return try? JSONEncoder().encode(self)
+    }
+}
+
 extension ImageDescription: JSONEncodable {
     func encodeToJSON() -> Any {
         return try? JSONEncoder().encode(self)
     }
 }
+
+extension LocalizationHint: JSONEncodable {
+    func encodeToJSON() -> Any {
+        return try? JSONEncoder().encode(self)
+    }
+}
+
 
 extension String: CodingKey {
 
