@@ -137,6 +137,12 @@ open class NET {
             }
             
         }
+        
+        public typealias addObjectByPoseCompletionHandler = (AddObjectResult?, Error?) -> Void
+        public static func addObjectByPose(objectWithPose: ObjectWithPose, apiResponseQueue: DispatchQueue, completion: @escaping addObjectByPoseCompletionHandler) {
+            ObjectsAPI.addObjectByPose(objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+        
     }
     
 }
