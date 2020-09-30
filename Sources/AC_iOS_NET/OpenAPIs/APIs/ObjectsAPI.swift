@@ -18,8 +18,8 @@ open class ObjectsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func addObjectByImage(description: ObjectWithMarkedImage, image: URL, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AddObjectResult?,_ error: Error?) -> Void)) {
-        addObjectByImageWithRequestBuilder(description: description, image: image).execute(apiResponseQueue) { result -> Void in
+    open class func addObjectByImage(server address: String? = nil, description: ObjectWithMarkedImage, image: URL, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: AddObjectResult?,_ error: Error?) -> Void)) {
+        addObjectByImageWithRequestBuilder(server: address, description: description, image: image).execute(apiResponseQueue) { result -> Void in
             switch result {
             case let .success(response):
                 completion(response.body, nil)
@@ -37,9 +37,11 @@ open class ObjectsAPI {
      - parameter image: (form) A JPEG-encoded image, must include GPS data in EXIF tags 
      - returns: RequestBuilder<AddObjectResult> 
      */
-    open class func addObjectByImageWithRequestBuilder(description: ObjectWithMarkedImage, image: URL) -> RequestBuilder<AddObjectResult> {
+    open class func addObjectByImageWithRequestBuilder(server address: String? = nil, description: ObjectWithMarkedImage, image: URL) -> RequestBuilder<AddObjectResult> {
         let path = "/object"
-        let URLString = OpenAPIClientAPI.basePath + path
+        let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
+        let URLString = addressString + path
+        
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
             "image": image.encodeToJSON()

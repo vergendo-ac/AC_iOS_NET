@@ -143,6 +143,11 @@ open class NET {
             ObjectsAPI.addObjectByPose(server: address, objectWithPose: objectWithPose, apiResponseQueue: apiResponseQueue, completion: completion)
         }
         
+        public typealias addObjectByImageCompletionHandler = (AddObjectResult?, Error?) -> Void
+        public static func addObjectByImage(server address: String? = nil, description: ObjectWithMarkedImage, image: URL, apiResponseQueue: DispatchQueue, completion: @escaping addObjectByImageCompletionHandler) {
+            ObjectsAPI.addObjectByImage(server: address, description: description, image: image, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
     }
     
 }
