@@ -144,7 +144,8 @@ open class NET {
         }
         
         public typealias addObjectByImageCompletionHandler = (AddObjectResult?, Error?) -> Void
-        public static func addObjectByImage(server address: String? = nil, description: ObjectWithMarkedImage, image: URL, apiResponseQueue: DispatchQueue, completion: @escaping addObjectByImageCompletionHandler) {
+        public typealias objectWithMarkedImage = ObjectWithMarkedImage
+        public static func addObjectByImage(server address: String? = nil, description: objectWithMarkedImage, image: URL, apiResponseQueue: DispatchQueue, completion: @escaping addObjectByImageCompletionHandler) {
             ObjectsAPI.addObjectByImage(server: address, description: description, image: image, apiResponseQueue: apiResponseQueue, completion: completion)
         }
 
