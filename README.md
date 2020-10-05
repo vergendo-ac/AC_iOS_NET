@@ -1,33 +1,17 @@
-# README #
+# Augmented City NET API Package For SDK
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Demo gif
+![Demo image](doc/ac_ios_demo.gif?raw=true "Demo app")
 
-### What is this repository for? ###
+## Introduction
+Making able to get|send|update stickers data from|to|at server, using common API (same naming forˆ iOS, Android & Unity platforms)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Supported Environments
+iOS version >= 13.0 & Swift 5 are recommended.
 
-### How do I get set up? ###
+## Demo Project
+The Augmented City demo app demonstrates how to use AC api.
+[Demo project](https://github.com/vergendo-ac/AC_iOS_SDK/tree/master/AC_demo)
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
-
-# AC_iOS_NET
-
-A description of this package.
+## License
+TBD
