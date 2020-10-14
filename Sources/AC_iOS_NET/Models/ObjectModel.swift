@@ -87,4 +87,20 @@ public enum ObjectModel {
         }
     }
     
+    public enum DeleteObject {
+        public struct Request: Encodable {
+            let stickerID: Int
+            
+            public init(stickerID: Int) {
+                self.stickerID = stickerID
+            }
+            
+        }
+        
+        public struct Response: Decodable {
+            public let status: CommonModel.ServerStatusResponse
+        }
+    }
+
+    
 }

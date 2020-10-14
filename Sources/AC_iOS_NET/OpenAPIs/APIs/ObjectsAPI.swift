@@ -41,7 +41,7 @@ open class ObjectsAPI {
         let path = "/object"
         let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
         let URLString = addressString + path
-        
+
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
             "image": image.encodeToJSON()

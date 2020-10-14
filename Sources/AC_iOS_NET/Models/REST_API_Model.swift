@@ -50,9 +50,16 @@ enum REST {
         
         enum ObjectOperations: String {
             case object //http://developer.vergendo.com:5000/api/object
+            case delete //DELETE http://<server>/api/object?id=<value>
             
             var path: String {
-                "/api/\(self.rawValue)"
+                switch self {
+                case .object:
+                    return "/api/\(self.rawValue)"
+                case .delete:
+                    return "/api/object"
+                }
+                
             }
 
             var additionalHeaders: [String:String] {
@@ -60,6 +67,8 @@ enum REST {
                 switch self {
                 case .object:
                     headers["Content-Type"] = "\(MimeType.json); charset=utf-8"
+                case .delete:
+                    break
                 }
                 return headers
             }

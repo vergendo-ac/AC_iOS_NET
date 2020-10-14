@@ -39,12 +39,11 @@ open class LocalizerAPI {
      - parameter hint: (form)  (optional)
      - returns: RequestBuilder<LocalizationResult> 
      */
-    open class func localizeWithRequestBuilder(server address: String? = nil,description: ImageDescription, image: URL, hint: LocalizationHint? = nil) -> RequestBuilder<LocalizationResult> {
+    open class func localizeWithRequestBuilder(server address: String? = nil, description: ImageDescription, image: URL, hint: LocalizationHint? = nil) -> RequestBuilder<LocalizationResult> {
         let path = "/localizer/localize"
         let addressString = address == nil ? OpenAPIClientAPI.basePath : "\(address!)/api/v2"
         let URLString = addressString + path
 
-        
         let formParams: [String:Any?] = [
             "description": description.encodeToJSON(),
             "image": image.encodeToJSON(),

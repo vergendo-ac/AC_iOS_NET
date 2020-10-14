@@ -10,19 +10,23 @@ import Foundation
 /** Series reconstruction task process info */
 public struct ReconstructionTaskStatus: Codable {
 
+    /** Reconstruction id */
+    public var reconstructionId: Int?
     /** Series task id */
     public var taskId: UUID
     public var stage: ReconstructionStage
     /** List of uploaded images filenames */
     public var images: [String]?
 
-    public init(taskId: UUID, stage: ReconstructionStage, images: [String]? = nil) {
+    public init(reconstructionId: Int? = nil, taskId: UUID, stage: ReconstructionStage, images: [String]? = nil) {
+        self.reconstructionId = reconstructionId
         self.taskId = taskId
         self.stage = stage
         self.images = images
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable { 
+        case reconstructionId = "reconstruction_id"
         case taskId = "task_id"
         case stage
         case images

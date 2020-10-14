@@ -11,6 +11,7 @@ import Foundation
 public struct LocalizationResult: Codable {
 
     public var camera: Camera?
+    /** Reconstruction id */
     public var reconstructionId: Int?
     /** Pose describes position and orientation in reconstruction coordinate system. Frame describes 4 points in placeholder coordinate system. */
     public var placeholders: [PlaceholderNode3d]?

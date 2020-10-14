@@ -10,6 +10,7 @@ import Foundation
 
 public struct ObjectWithPose: Codable {
 
+    /** Reconstruction id */
     public var reconstructionId: Int
     public var pose: Pose
     public var frame: [Vector3d]?

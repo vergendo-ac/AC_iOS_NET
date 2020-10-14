@@ -11,9 +11,9 @@ import Foundation
 public struct ScanPassage: Codable {
 
     public var style: ScanStyle
-    public var points: [[ScanPoint]]
+    public var points: [[ScanFrame]]
 
-    public init(style: ScanStyle, points: [[ScanPoint]]) {
+    public init(style: ScanStyle, points: [[ScanFrame]]) {
         self.style = style
         self.points = points
     }

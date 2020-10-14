@@ -87,11 +87,11 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
         
         originalRequest.httpMethod = method.rawValue
         
-        buildHeaders().forEach { key, value in
+        headers.forEach { key, value in
             originalRequest.setValue(value, forHTTPHeaderField: key)
         }
         
-        headers.forEach { key, value in
+        buildHeaders().forEach { key, value in
             originalRequest.setValue(value, forHTTPHeaderField: key)
         }
         
@@ -134,27 +134,27 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
             
             let dataTask = urlSession.dataTask(with: request) { [weak self] data, response, error in
                 
-                if let d = data, let dataStr = String(data: d, encoding: .utf8) {
-                    print(dataStr)
-                }
-                
-                if let r = response {
-                    print(r)
-                    print(r.description)
-                    print(r.debugDescription)
-                }
-                
-                if let e = error {
-                    print(e)
-                    print(e.localizedDescription)
-                }
-
-                
                 guard let self = self else { return }
                 
                 if let taskCompletionShouldRetry = self.taskCompletionShouldRetry {
                     
                     taskCompletionShouldRetry(data, response, error) { [weak self] shouldRetry in
+                        
+                        if let d = data, let dataStr = String(data: d, encoding: .utf8) {
+                            print(dataStr)
+                        }
+                        
+                        if let r = response {
+                            print(r)
+                            print(r.description)
+                            print(r.debugDescription)
+                        }
+                        
+                        if let e = error {
+                            print(e)
+                            print(e.localizedDescription)
+                        }
+
                         
                         guard let self = self else { return }
                         
@@ -260,8 +260,11 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
     }
 
     open func buildHeaders() -> [String: String] {
-        var httpHeaders = OpenAPIClientAPI.customHeaders
+        var httpHeaders: [String : String] = [:]
         for (key, value) in self.headers {
+            httpHeaders[key] = value
+        }
+        for (key, value) in OpenAPIClientAPI.customHeaders {
             httpHeaders[key] = value
         }
         return httpHeaders
@@ -490,8 +493,9 @@ fileprivate class FileUploadEncoding: ParameterEncoding {
                         data: data
                     )
                 }
+                
             case let data as Data:
-                    
+                            
                 urlRequest = configureDataUploadRequest(
                     urlRequest: urlRequest,
                     boundary: boundary,

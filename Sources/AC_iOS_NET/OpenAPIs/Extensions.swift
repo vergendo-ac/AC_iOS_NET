@@ -104,7 +104,6 @@ extension LocalizationHint: JSONEncodable {
     }
 }
 
-
 extension String: CodingKey {
 
     public var stringValue: String {
