@@ -143,7 +143,7 @@ open class NET {
         public typealias deleteObjectCompletionHandler = (deleteObjectResponse?, URLResponse?, Error?) -> Void
 
         public static func deleteObject(from serverAddress: String = Servers.addresses[0], by request: ObjectModel.DeleteObject.Request, completion: @escaping deleteObjectCompletionHandler) {
-            guard let url = REST.API.ObjectOperations.delete.getUrl(for: serverAddress) else { completion(nil, nil, nil); return }
+            guard let url = REST.API.ObjectOperations.delete.getUrl(for: serverAddress, additionalUrlPart: "?id=\(request.stickerID)") else { completion(nil, nil, nil); return }
 
             nativeNet.dataTask(
             with: REST.API.ObjectOperations.delete.additionalHeaders,
