@@ -182,4 +182,16 @@ open class NET {
 
     }
     
+    open class ReconstructionOperator {
+        
+        public static func getAllCities(apiResponseQueue: DispatchQueue, completion: @escaping (_ data: [AugmentedCity]?,_ error: Error?) -> Void) {
+            ReconstructionAPI.getAllCities(apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+        
+        public static func getAllCities(location: CLLocation, apiResponseQueue: DispatchQueue, completion: @escaping (_ data: AugmentedCity?,_ error: Error?) -> Void) {
+            ReconstructionAPI.getCityByGps(pLatitude: location.coordinate.latitude, pLongitude: location.coordinate.longitude, apiResponseQueue: apiResponseQueue, completion: completion)
+        }
+
+    }
+    
 }
