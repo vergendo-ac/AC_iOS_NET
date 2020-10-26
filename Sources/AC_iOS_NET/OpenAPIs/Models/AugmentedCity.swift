@@ -26,10 +26,10 @@ public struct AugmentedCity: Codable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable { 
-        case cityId = "city_id"
-        case city
-        case country
-        case description
+        case cityId = "City_id"
+        case city = "City"
+        case country = "Country"
+        case description = "Description"
     }
 
 }
