@@ -71,8 +71,9 @@ open class ReconstructionAPI {
      - returns: RequestBuilder<[AugmentedCity]> 
      */
     open class func getAllCitiesWithRequestBuilder() -> RequestBuilder<[AugmentedCity]> {
+        //https://developer.augmented.city/rpc/get_cities_all
         let path = "/get_cities_all"
-        let URLString = OpenAPIClientAPI.basePath + path
+        let URLString = "https://developer.augmented.city/rpc" + path
         let parameters: [String:Any]? = nil
         
         let url = URLComponents(string: URLString)
@@ -110,8 +111,9 @@ open class ReconstructionAPI {
      - returns: RequestBuilder<AugmentedCity> 
      */
     open class func getCityByGpsWithRequestBuilder(pLatitude: Double, pLongitude: Double) -> RequestBuilder<AugmentedCity> {
+        //https://developer.augmented.city/rpc/get_city
         let path = "/get_city"
-        let URLString = OpenAPIClientAPI.basePath + path
+        let URLString = "https://developer.augmented.city/rpc" + path
         let parameters: [String:Any]? = nil
         
         var url = URLComponents(string: URLString)
