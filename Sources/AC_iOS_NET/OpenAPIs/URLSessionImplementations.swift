@@ -365,6 +365,7 @@ open class URLSessionDecodableRequestBuilder<T:Decodable>: URLSessionRequestBuil
             let decodeResult = CodableHelper.decode(T.self, from: data)
             
             print(T.self)
+            print(T.self.self)
             
             switch decodeResult {
             case let .success(decodableObj):
