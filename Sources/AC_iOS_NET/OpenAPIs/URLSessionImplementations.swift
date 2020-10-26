@@ -134,27 +134,26 @@ open class URLSessionRequestBuilder<T>: RequestBuilder<T> {
             
             let dataTask = urlSession.dataTask(with: request) { [weak self] data, response, error in
                 
+                if let d = data, let dataStr = String(data: d, encoding: .utf8) {
+                    print(dataStr)
+                }
+                
+                if let r = response {
+                    print(r)
+                    print(r.description)
+                    print(r.debugDescription)
+                }
+                
+                if let e = error {
+                    print(e)
+                    print(e.localizedDescription)
+                }
+
                 guard let self = self else { return }
                 
                 if let taskCompletionShouldRetry = self.taskCompletionShouldRetry {
                     
                     taskCompletionShouldRetry(data, response, error) { [weak self] shouldRetry in
-                        
-                        if let d = data, let dataStr = String(data: d, encoding: .utf8) {
-                            print(dataStr)
-                        }
-                        
-                        if let r = response {
-                            print(r)
-                            print(r.description)
-                            print(r.debugDescription)
-                        }
-                        
-                        if let e = error {
-                            print(e)
-                            print(e.localizedDescription)
-                        }
-
                         
                         guard let self = self else { return }
                         
