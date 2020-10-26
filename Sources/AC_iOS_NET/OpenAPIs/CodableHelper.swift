@@ -45,6 +45,7 @@ open class CodableHelper {
             print(model)
         } catch {
             print(error.localizedDescription)
+            print(error)
         }
         
         return Swift.Result { try self.jsonDecoder.decode(type, from: data) }
