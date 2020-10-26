@@ -40,6 +40,10 @@ open class CodableHelper {
 
     open class func decode<T>(_ type: T.Type, from data: Data) -> Swift.Result<T, Error> where T: Decodable {
         
+        if let dataStr = String(data: data, encoding: .utf8) {
+            print(dataStr)
+        }
+        
         do {
             let model = try self.jsonDecoder.decode(type, from: data)
             print(model)
