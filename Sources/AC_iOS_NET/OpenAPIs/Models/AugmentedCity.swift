@@ -26,7 +26,7 @@ public struct AugmentedCity: Codable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable { 
-        case cityId = "сity_id"
+        case cityId = "city_id"
         case city
         case country
         case description
