@@ -139,35 +139,6 @@ open class NET {
             
         }
         
-        public typealias deleteObjectResponse = ObjectModel.DeleteObject.Response
-        public typealias deleteObjectCompletionHandler = (deleteObjectResponse?, URLResponse?, Error?) -> Void
-
-        public static func deleteObject(from serverAddress: String = Servers.addresses[0], by request: ObjectModel.DeleteObject.Request, completion: @escaping deleteObjectCompletionHandler) {
-            guard let url = REST.API.ObjectOperations.delete.getUrl(for: serverAddress, additionalUrlPart: "?id=\(request.stickerID)") else { completion(nil, nil, nil); return }
-
-            nativeNet.dataTask(
-            with: REST.API.ObjectOperations.delete.additionalHeaders,
-                with: url,
-                restMethod: .DELETE)
-            { (mData, mResponse, mError) in
-                guard mError == nil else { completion(nil, mResponse, mError); return }
-                guard let data = mData else { completion(nil, mResponse, nil); return }
-                
-                do {
-                    //print(data)
-                    print(String(data: data, encoding: .utf8)!)
-                    let deleteResponse = try JSONDecoder().decode(ObjectModel.DeleteObject.Response.self, from: data)
-                    completion(deleteResponse, mResponse, nil)
-                } catch {
-                    print(error.localizedDescription)
-                    print(error)
-                    print(String(data: data, encoding: .utf8)!)
-                    completion(nil, mResponse, error)
-                }
-            }
-
-        }
-        
         //MARK: Open API
         public typealias addObjectWithPoseCompletionHandler = (AddObjectResult?, Error?) -> Void
         public static func addObjectWithPose(server address: String? = nil, objectWithPose: ObjectWithPose, apiResponseQueue: DispatchQueue, completion: @escaping addObjectWithPoseCompletionHandler) {

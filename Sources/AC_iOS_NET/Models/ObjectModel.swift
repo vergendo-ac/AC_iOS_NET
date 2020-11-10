@@ -89,7 +89,7 @@ public enum ObjectModel {
     
     public enum DeleteObject {
         public struct Request: Encodable {
-            let stickerID: String
+            public let stickerID: String
             
             public init(stickerID: String) {
                 self.stickerID = stickerID
