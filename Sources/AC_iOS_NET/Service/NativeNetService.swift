@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NativeNetService {
+open class NativeNetService {
     
     static let sharedInstance = NativeNetService()
     

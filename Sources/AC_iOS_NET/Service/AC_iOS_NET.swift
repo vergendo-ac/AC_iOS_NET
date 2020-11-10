@@ -7,7 +7,7 @@ struct AC_iOS_NET {
 
 open class NET {
     
-    static let nativeNet = NativeNetService.sharedInstance
+    public static let nativeNet = NativeNetService.sharedInstance
     
     open class Localizer {
         
