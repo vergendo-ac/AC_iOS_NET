@@ -7,7 +7,15 @@ struct AC_iOS_NET {
 
 open class NET {
     
-    public static let nativeNet = NativeNetService.sharedInstance
+    static let nativeNet = NativeNetService.sharedInstance
+    
+    open class Common {
+        
+        public static func runNetTask(for data: Data? = nil, with additionalHeaders: [String : String]? = nil, with url: URL, restMethod: REST.Method, completion: @escaping ((Data?, URLResponse?, Error?) -> Void)) {
+            nativeNet.dataTask(for: data, with: additionalHeaders, with: url, restMethod: restMethod, completion: completion)
+        }
+        
+    }
     
     open class Localizer {
         
