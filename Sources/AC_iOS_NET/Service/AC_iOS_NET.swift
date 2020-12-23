@@ -3,6 +3,7 @@ import CoreLocation
 
 struct AC_iOS_NET {
     let text = "Hello, World!"
+    let text2 = "Hello, World2!"
 }
 
 open class NET {
