@@ -12,11 +12,11 @@ public struct Sticker: Codable {
 
     public var stickerId: String
     public var stickerText: String
-    public var stickerType: String
+    public var stickerType: String?
     public var stickerSubtype: String?
     public var path: String
 
-    public init(stickerId: String, stickerText: String, stickerType: String, stickerSubtype: String? = nil, path: String) {
+    public init(stickerId: String, stickerText: String, stickerType: String? = nil, stickerSubtype: String? = nil, path: String) {
         self.stickerId = stickerId
         self.stickerText = stickerText
         self.stickerType = stickerType
