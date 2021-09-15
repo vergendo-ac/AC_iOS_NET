@@ -46,7 +46,7 @@ public struct Sticker: Codable {
 
         try container.encode(stickerId, forKey: "sticker_id")
         try container.encode(stickerText, forKey: "sticker_text")
-        try container.encode(stickerType, forKey: "sticker_type")
+        try container.encodeIfPresent(stickerType, forKey: "sticker_type")
         try container.encodeIfPresent(stickerSubtype, forKey: "sticker_subtype")
         try container.encode(path, forKey: "path")
         try container.encodeMap(additionalProperties)
@@ -59,7 +59,7 @@ public struct Sticker: Codable {
 
         stickerId = try container.decode(String.self, forKey: "sticker_id")
         stickerText = try container.decode(String.self, forKey: "sticker_text")
-        stickerType = try container.decode(String.self, forKey: "sticker_type")
+        stickerType = try container.decodeIfPresent(String.self, forKey: "sticker_type")
         stickerSubtype = try container.decodeIfPresent(String.self, forKey: "sticker_subtype")
         path = try container.decode(String.self, forKey: "path")
         var nonAdditionalPropertyKeys = Set<String>()
