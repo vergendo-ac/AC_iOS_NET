@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Sticker: Codable {
 
     public var stickerId: String
