@@ -14,13 +14,15 @@ public struct Sticker: Codable {
     public var stickerType: String?
     public var stickerSubtype: String?
     public var path: String
+    public var type: String?
 
-    public init(stickerId: String, stickerText: String, stickerType: String? = nil, stickerSubtype: String? = nil, path: String) {
+    public init(stickerId: String, stickerText: String, stickerType: String? = nil, stickerSubtype: String? = nil, path: String, type: String? = nil) {
         self.stickerId = stickerId
         self.stickerText = stickerText
         self.stickerType = stickerType
         self.stickerSubtype = stickerSubtype
         self.path = path
+        self.type = type
     }
     public var additionalProperties: [String:String] = [:]
 
@@ -48,6 +50,7 @@ public struct Sticker: Codable {
         try container.encodeIfPresent(stickerType, forKey: "sticker_type")
         try container.encodeIfPresent(stickerSubtype, forKey: "sticker_subtype")
         try container.encode(path, forKey: "path")
+        try container.encodeIfPresent(path, forKey: "type")
         try container.encodeMap(additionalProperties)
     }
 
@@ -61,12 +64,14 @@ public struct Sticker: Codable {
         stickerType = try container.decodeIfPresent(String.self, forKey: "sticker_type")
         stickerSubtype = try container.decodeIfPresent(String.self, forKey: "sticker_subtype")
         path = try container.decode(String.self, forKey: "path")
+        type = try container.decodeIfPresent(String.self, forKey: "type")
         var nonAdditionalPropertyKeys = Set<String>()
         nonAdditionalPropertyKeys.insert("sticker_id")
         nonAdditionalPropertyKeys.insert("sticker_text")
         nonAdditionalPropertyKeys.insert("sticker_type")
         nonAdditionalPropertyKeys.insert("sticker_subtype")
         nonAdditionalPropertyKeys.insert("path")
+        nonAdditionalPropertyKeys.insert("type")
         additionalProperties = try container.decodeMap(String.self, excludedKeys: nonAdditionalPropertyKeys)
     }
 
