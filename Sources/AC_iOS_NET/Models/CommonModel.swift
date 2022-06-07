@@ -62,6 +62,7 @@ public enum CommonModel {
         case path
         case sticker_text
         case sticker_type
+        case type
         case sticker_detailed_type
         case created_by
         case creation_date
@@ -74,6 +75,7 @@ public enum CommonModel {
         public var path: String?
         public var sticker_text: String?
         public var sticker_type: String?
+        public var type: String?
         public var sticker_detailed_type: String?
         public var created_by: String?
         public var creation_date: String?
@@ -85,6 +87,7 @@ public enum CommonModel {
             path: String? = nil,
             sticker_text: String? = nil,
             sticker_type: String? = nil,
+            type: String? = nil,
             sticker_detailed_type: String? = nil,
             created_by: String? = nil,
             creation_date: String? = nil,
@@ -95,6 +98,7 @@ public enum CommonModel {
             self.path = path
             self.sticker_text = sticker_text
             self.sticker_type = sticker_type
+            self.type = type
             self.sticker_detailed_type = sticker_detailed_type
             self.created_by = created_by
             self.creation_date = creation_date
@@ -108,6 +112,7 @@ public enum CommonModel {
             case .path: self.path = value
             case .sticker_text: self.sticker_text = value
             case .sticker_type: self.sticker_type = value
+            case .type: self.type = value
             case .sticker_detailed_type: self.sticker_detailed_type = value
             case .created_by: self.created_by = value
             case .creation_date: self.creation_date = value
